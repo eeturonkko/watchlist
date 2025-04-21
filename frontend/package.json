@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.28.2",
+    "@clerk/react-router": "^1.2.7",
+    "lucide-react": "^0.503.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
