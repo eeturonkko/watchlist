@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/ui/header";
+import "./App.css";
 
 // Placeholder components for routes
 const Home = () => (
@@ -10,24 +11,9 @@ const Home = () => (
     <h2>Home Page</h2>
   </div>
 );
-const Movies = () => (
+const Watchlist = () => (
   <div className="page-container">
-    <h2>Movies Page</h2>
-  </div>
-);
-const TVShows = () => (
-  <div className="page-container">
-    <h2>TV Shows Page</h2>
-  </div>
-);
-const MyList = () => (
-  <div className="page-container">
-    <h2>My List Page</h2>
-  </div>
-);
-const SignIn = () => (
-  <div className="page-container">
-    <h2>Sign In Page</h2>
+    <h2>Watchlist page</h2>
   </div>
 );
 
@@ -51,10 +37,7 @@ function App() {
             </div>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/movies" element={<Movies />} />
-              <Route path="/tvshows" element={<TVShows />} />
-              <Route path="/mylist" element={<MyList />} />
-              <Route path="/signin" element={<SignIn />} />
+              <Route path="/watchlist" element={<Watchlist />} />
             </Routes>
           </div>
         </main>
