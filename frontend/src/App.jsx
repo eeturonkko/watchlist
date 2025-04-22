@@ -1,29 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/ui/header";
 import "./App.css";
-
-// Placeholder components for routes
-const Home = () => (
-  <div className="page-container">
-    <h2>Home Page</h2>
-  </div>
-);
-const Watchlist = () => (
-  <div className="page-container">
-    <h2>Watchlist page</h2>
-  </div>
-);
+import { Home } from "./pages/Home";
+import Header from "./components/ui/header";
+import { useEffect, useState } from "react";
+import { fetchTrending } from "./utils/tmdb";
+import { Watchlist } from "./pages/Watchlist";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [trending, setTrending] = useState([]);
 
   useEffect(() => {
-    fetch("/api/hello")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
+    const getTrendingMovies = async () => {
+      try {
+        const data = await fetchTrending();
+        setTrending(data.results);
+      } catch (err) {
+        console.error("Error fetching trending:", err);
+      }
+    };
+
+    getTrendingMovies();
   }, []);
 
   return (
@@ -32,11 +30,8 @@ function App() {
         <Header />
         <main>
           <div className="content-container">
-            <div className="api-message">
-              <h1>{message || "Loading..."}</h1>
-            </div>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home trending={trending} />} />
               <Route path="/watchlist" element={<Watchlist />} />
             </Routes>
           </div>
