@@ -1,6 +1,6 @@
 "use client";
 
-import "./Header.css";
+import "../styles/Header.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {

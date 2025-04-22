@@ -1,6 +1,6 @@
-import "./Home.css";
+import "./styles/Home.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // <-- Add this
+import { useNavigate } from "react-router-dom";
 import MovieCard from "../components/ui/MovieCard";
 import SearchBar from "../components/ui/SearchBar";
 

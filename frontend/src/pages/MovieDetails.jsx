@@ -1,6 +1,6 @@
 import React from "react";
 
-function MovieDetails() {
+export function MovieDetails() {
   return <div>MovieDetails</div>;
 }
 

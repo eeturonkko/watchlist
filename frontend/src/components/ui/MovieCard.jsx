@@ -1,4 +1,4 @@
-import "./MovieCard.css";
+import "../styles/MovieCard.css";
 import { Link } from "react-router-dom";
 
 export function MovieCard({ movie }) {
