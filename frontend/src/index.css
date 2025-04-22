@@ -1,5 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2&display=swap");
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Exo 2", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

@@ -1,4 +1,5 @@
 import "./MovieCard.css";
+import { Link } from "react-router-dom";
 
 export function MovieCard({ movie }) {
   const imageUrl = movie.poster_path
@@ -6,7 +7,7 @@ export function MovieCard({ movie }) {
     : "/no-image.png";
 
   return (
-    <div className="movie-card">
+    <Link to={`/movie/${movie.id}`} className="movie-card">
       <img
         src={imageUrl}
         alt={movie.title}
@@ -17,7 +18,7 @@ export function MovieCard({ movie }) {
         <h3 className="movie-title">{movie.title}</h3>
         <p className="movie-date">{movie.release_date?.slice(0, 4)}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 

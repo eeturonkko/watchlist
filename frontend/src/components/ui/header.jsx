@@ -40,11 +40,13 @@ const Header = () => {
                 Home
               </Link>
             </li>
-            <li>
-              <Link to="/watchlist" onClick={() => setMenuOpen(false)}>
-                Your watchlist
-              </Link>
-            </li>
+            <SignedIn>
+              <li>
+                <Link to="/watchlist" onClick={() => setMenuOpen(false)}>
+                  Your watchlist
+                </Link>
+              </li>
+            </SignedIn>
           </ul>
         </nav>
 
