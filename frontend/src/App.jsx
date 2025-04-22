@@ -2,7 +2,7 @@
 
 import "./App.css";
 import { Home } from "./pages/Home";
-import Header from "./components/ui/header";
+import Header from "./components/ui/Header";
 import { useEffect, useState } from "react";
 import { fetchTrending } from "./utils/tmdb";
 import { Watchlist } from "./pages/Watchlist";
