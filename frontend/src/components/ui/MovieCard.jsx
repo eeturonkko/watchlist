@@ -1,7 +1,7 @@
 import "../styles/MovieCard.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useUser } from "@clerk/clerk-react";
+import { SignedIn, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 
 export function MovieCard({ movie }) {
@@ -52,10 +52,11 @@ export function MovieCard({ movie }) {
           <p className="movie-date">{movie.release_date?.slice(0, 4)}</p>
         </div>
       </Link>
-
-      <button onClick={handleAddToWatchlist} className="add-btn">
-        + Add to Watchlist
-      </button>
+      <SignedIn>
+        <button onClick={handleAddToWatchlist} className="add-btn">
+          + Add to Watchlist
+        </button>
+      </SignedIn>
     </div>
   );
 }
