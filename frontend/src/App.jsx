@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { fetchTrending } from "./utils/tmdb";
 import { Watchlist } from "./pages/Watchlist";
 import { MovieDetails } from "./pages/MovieDetails";
+import { ToastContainer } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
               <Route path="/movie/:id" element={<MovieDetails />} />
             </Routes>
           </div>
+          <ToastContainer />
         </main>
       </div>
     </Router>

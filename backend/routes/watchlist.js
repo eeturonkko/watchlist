@@ -1,5 +1,5 @@
-const router = express.Router();
 const express = require("express");
+const router = express.Router();
 const sanitizeHtml = require("sanitize-html");
 const WatchlistItem = require("../models/WatchlistItem");
 const { body, param, validationResult } = require("express-validator");
