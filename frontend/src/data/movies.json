@@ -1,50 +1,62 @@
 [
   {
+    "id": 0,
     "title": "Sinners",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 1,
     "title": "A Working Man",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 2,
     "title": "Captain America: Brave New World",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 3,
     "title": "Conclave",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 4,
     "title": "Mickey 17",
-    "movie-year": 2024
+    "release_date": 2024
   },
   {
+    "id": 5,
     "title": "iHostage",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 6,
     "title": "Novocaine",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 7,
     "title": "Thunderbolts*",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 8,
     "title": "A Minecraft Movie",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 9,
     "title": "G20",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 10,
     "title": "The Accountant 2",
-    "movie-year": 2025
+    "release_date": 2025
   },
   {
+    "id": 11,
     "title": "The Woman in the Yard",
-    "movie-year": 2025
+    "release_date": 2025
   }
 ]
