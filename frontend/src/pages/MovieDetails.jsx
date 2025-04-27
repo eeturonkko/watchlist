@@ -32,29 +32,29 @@ export function MovieDetails() {
 
   return (
     <div className="movie-details">
-      <img
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        alt={movie.title}
-        className="movie-poster"
-      />
-      <div>
-        <h1>{movie.title}</h1>
-        <p>{movie.overview}</p>
-        <div className="movie-info">
-          <p>
-            <strong>Release date:</strong> {movie.release_date}
-          </p>
-          <div className="movie-genres">
-            <strong>Genres:</strong>
-            {movie.genres.map(genre => (
-              <span key={genre.id}>{genre.name}</span>
-          ))}
-          </div>
-        
+    <img
+      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+      alt={movie.title}
+      className="movie-poster"
+    />
+    <div className="movie-info">
+      <h1>{movie.title}</h1>
+      <h3>{movie.release_date?.slice(0, 4)} | {movie.genres.map(genre => genre.name).join(", ")}</h3>
+      <p className="movie-overview">{movie.overview}</p>
+      <div className="movie-rating">
+        <div>
+          <strong>IMDb Rating</strong>
+          <div>{movie.vote_average ? movie.vote_average : "N/A"}</div>
+        </div>
+        <div>
+          <strong>User Score</strong>
+          <div>{movie.vote_count}</div>
         </div>
       </div>
+      <button>Add to Watchlist</button> {/* Lisää katselulistalle -painike */}
     </div>
-  );
+  </div>
+);
 }
 
 export default MovieDetails;

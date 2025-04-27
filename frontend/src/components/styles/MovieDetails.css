@@ -1,65 +1,99 @@
 .movie-details {
+    display: flex;
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
+    background-color: #111;
     color: #fff;
     font-family: 'Roboto', sans-serif;
-    display: block;
+    justify-content: space-between; /* Kuvan ja tekstin tasapainoinen sijoittaminen */
   }
   
   .movie-details .movie-poster {
-    width: 40%;  
+    width: 300px;  /* Kuvan leveys */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     margin-right: 20px;
-    float: left;
   }
   
   .movie-details .movie-info {
-    float: left;
-    width: 55%;  
-    margin-bottom: 20px;
+    flex: 1;
   }
   
   .movie-details .movie-info h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
-  .movie-details .movie-overview {
+  .movie-details .movie-info h3 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #bbb;
+  }
+  
+  .movie-details .movie-info .movie-overview {
     font-size: 1.1rem;
     margin-top: 15px;
     line-height: 1.6;
   }
   
-  
-  @media (max-width: 900px) {
-    .movie-details {
-      text-align: center;  
-    }
-  
-    .movie-details .movie-poster {
-      width: 50%;  
-      margin-right: 0;
-      margin-bottom: 20px;
-      float: none;  
-    }
-  
-    .movie-details .movie-info {
-      width: 90%;  
-      float: none;
-    }
+  .movie-details .movie-info .movie-genres {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
   }
   
+  .movie-details .movie-info .movie-genres span {
+    background-color: #444;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 1rem;
+  }
   
-  @media (max-width: 600px) {
+  .movie-details .movie-info .movie-rating {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .movie-details .movie-info .movie-rating div {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+  }
+  
+  .movie-details button {
+    background-color: #e91e63;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .movie-details button:hover {
+    background-color: #c2185b;
+  }
+  
+  /* Responsiivisuus pienillä näytöillä */
+  @media (max-width: 768px) {
+    .movie-details {
+      flex-direction: column;
+      align-items: center; /* Keskittää sisällön pienillä näytöillä */
+    }
+  
     .movie-details .movie-poster {
-      width: 80%;  
+      width: 80%;
+      margin-right: 0;
+      margin-bottom: 20px;
     }
   
     .movie-details .movie-info {
-      width: 100%;  
+      text-align: center;
     }
   }
   
