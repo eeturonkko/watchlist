@@ -44,7 +44,7 @@ export function MovieCard({ movie }) {
       <Link to={`/movie/${movie.id}`} className="movie-card-content">
         <img
           src={imageUrl}
-          alt={movie.title}
+          alt={`No poster for ${movie.title}`}
           className="movie-poster"
           loading="lazy"
         />

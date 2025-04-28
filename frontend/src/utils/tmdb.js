@@ -18,3 +18,12 @@ export const fetchMovieByName = async (name) => {
   const data = await res.json();
   return { ...data, results: data.results.slice(0, 1) };
 };
+
+export const fetchMoviesByName = async (name) => {
+  const res = await fetch(
+    `${BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${name}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch movies by name");
+  const data = await res.json();
+  return { ...data, results: data.results.slice(0, 12) };
+};

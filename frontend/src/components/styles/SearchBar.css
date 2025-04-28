@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .search-input {
@@ -35,4 +36,24 @@
 
 .search-button:hover {
   background-color: #2980b9;
+}
+
+.search-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.search-checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #3498db;
+  cursor: pointer;
+}
+
+.search-checkbox-container label {
+  font-size: 0.95rem;
+
+  cursor: pointer;
 }

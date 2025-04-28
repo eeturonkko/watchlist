@@ -2,12 +2,13 @@
 
 import "./App.css";
 import { Home } from "./pages/Home";
-import Header from "./components/ui/Header";
+import { Movies } from "./pages/Movies";
 import { useEffect, useState } from "react";
+import Header from "./components/ui/Header";
 import { fetchTrending } from "./utils/tmdb";
 import { Watchlist } from "./pages/Watchlist";
-import { MovieDetails } from "./pages/MovieDetails";
 import { ToastContainer } from "react-toastify";
+import { MovieDetails } from "./pages/MovieDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="/" element={<Home trending={trending} />} />
               <Route path="/watchlist" element={<Watchlist />} />
               <Route path="/movie/:id" element={<MovieDetails />} />
+              <Route path="/movies" element={<Movies />} />{" "}
             </Routes>
           </div>
           <ToastContainer />
