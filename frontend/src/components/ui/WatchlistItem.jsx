@@ -68,7 +68,7 @@ export function WatchlistItem({ item, onRemove }) {
     }
   };
 
-  let statusClass = "Planned to watch";
+  /* let statusClass = "Planned to watch";
   switch (status) {
     case "planned":
       statusClass = "Planned to watch";
@@ -81,7 +81,7 @@ export function WatchlistItem({ item, onRemove }) {
       break;
     default:
       statusClass = "Planned to watch";
-  }
+  } */
 
   const hasNotesOrRating = displayNotes || displayRating;
 
@@ -98,7 +98,7 @@ export function WatchlistItem({ item, onRemove }) {
               />
               <div className="watchlist-info">
                 <h3 className="watchlist-title">{item.title}</h3>
-                <p className="watchlist-status">{statusClass}</p>
+                {/*  <p className="watchlist-status">{statusClass}</p> */}
               </div>
             </div>
             <div className="watchlist-back">
@@ -115,7 +115,7 @@ export function WatchlistItem({ item, onRemove }) {
             <img src={imageUrl} alt={item.title} className="watchlist-poster" />
             <div className="watchlist-info">
               <h3 className="watchlist-title">{item.title}</h3>
-              <p className="watchlist-status">{statusClass}</p>
+              {/* <p className="watchlist-status">{statusClass}</p> */}
             </div>
           </div>
         )}
