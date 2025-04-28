@@ -1,8 +1,8 @@
 import "../styles/MovieCard.css";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { SignedIn, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { addMovieToWatchlist } from "../../utils/tmdb";
+import { SignedIn, useUser } from "@clerk/clerk-react";
 
 export function MovieCard({ movie }) {
   const { user } = useUser();
@@ -15,23 +15,19 @@ export function MovieCard({ movie }) {
       return;
     }
 
+    const payload = {
+      userId: user.id,
+      movieId: movie.id,
+      title: movie.title,
+      type: "movie",
+      status: "planned",
+      notes: "",
+      imageUrl: imageUrl,
+    };
+
     try {
-      const payload = {
-        userId: user.id,
-        movieId: movie.id,
-        title: movie.title,
-        type: "movie",
-        status: "planned",
-        notes: "",
-        imageUrl: imageUrl,
-      };
-
-      const res = await axios.post(
-        "http://localhost:3000/api/watchlist",
-        payload
-      );
-
-      console.log("Saved:", res.data);
+      const savedData = await addMovieToWatchlist(payload);
+      console.log("Saved:", savedData);
       toast.success(`${movie.title} added to watchlist!`);
     } catch (err) {
       console.error("Error adding to watchlist:", err);
@@ -44,7 +40,7 @@ export function MovieCard({ movie }) {
       <Link to={`/movie/${movie.id}`} className="movie-card-content">
         <img
           src={imageUrl}
-          alt={movie.title}
+          alt={`No poster for ${movie.title}`}
           className="movie-poster"
           loading="lazy"
         />

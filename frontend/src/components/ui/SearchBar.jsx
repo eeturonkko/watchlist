@@ -6,6 +6,8 @@ const SearchBar = ({
   onChange,
   onSearch,
   placeholder = "Search...",
+  checked,
+  setChecked,
 }) => {
   return (
     <div className="search-bar">
@@ -19,6 +21,16 @@ const SearchBar = ({
       <button className="search-button" onClick={onSearch}>
         Search
       </button>
+
+      <div className="search-checkbox-container">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={(e) => setChecked(e.target.checked)}
+          id="search-multiple"
+        />
+        <label htmlFor="search-multiple">Search multiple</label>
+      </div>
     </div>
   );
 };
