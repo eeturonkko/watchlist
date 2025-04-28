@@ -8,6 +8,8 @@
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
   gap: 1.5rem;
   padding: 1rem;
   align-items: stretch;

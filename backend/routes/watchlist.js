@@ -69,9 +69,11 @@ router.post(
   handleValidation,
   async (req, res) => {
     try {
-      const { userId, title, type, status, notes, imageUrl } = req.body;
+      const { userId, movieId, title, type, status, notes, imageUrl } =
+        req.body;
       const newItem = new WatchlistItem({
         userId,
+        movieId,
         title,
         type,
         status,

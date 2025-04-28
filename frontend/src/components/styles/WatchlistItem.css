@@ -1,0 +1,259 @@
+.watchlist-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 370px;
+  background: #1c1c1c;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.watchlist-item:hover {
+  transform: scale(1.02);
+}
+
+.watchlist-item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.watchlist-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  z-index: 2;
+  transition: opacity 0.25s ease;
+}
+
+.watchlist-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #1c1c1c;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.25s ease;
+  text-align: center;
+}
+
+.watchlist-item:hover .watchlist-back {
+  opacity: 1;
+  z-index: 3;
+}
+
+.watchlist-item:hover .watchlist-front {
+  opacity: 0;
+}
+
+.no-flip .watchlist-back,
+.no-flip .watchlist-front {
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+.no-flip:hover .watchlist-back,
+.no-flip:hover .watchlist-front {
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+.watchlist-poster {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-bottom: 1px solid #333;
+}
+
+.watchlist-info {
+  width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.watchlist-title {
+  font-size: 1rem;
+  margin: 0.3rem 0 0.2rem 0;
+  line-height: 1.2;
+  min-height: 2.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.watchlist-status {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #ccc;
+  margin-top: 0.2rem;
+}
+
+.watchlist-notes {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-bottom: 0.5rem;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.watchlist-rating {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-top: 0.2rem;
+}
+
+.remove-btn,
+.notes-btn {
+  padding: 0.5rem;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-top: 1px solid #333;
+  border-radius: 0;
+  width: 100%;
+}
+
+.remove-btn {
+  background-color: #e74c3c;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+}
+
+.notes-btn {
+  background-color: #3498db;
+}
+
+.notes-btn:hover {
+  background-color: #2980b9;
+}
+
+.status-select {
+  padding: 0.5rem;
+  background: #2c2c2c;
+  color: white;
+  border: none;
+  border-top: 1px solid #333;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  appearance: none;
+}
+
+.watchlist-dialog {
+  background: #2c2c2c;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  border: none;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.25s ease;
+}
+
+.watchlist-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.notes-textarea {
+  width: 100%;
+  height: 100px;
+  background: #1c1c1c;
+  border: 1px solid #555;
+  color: white;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  resize: none;
+  border-radius: 5px;
+}
+
+.rating-input {
+  width: 100%;
+  padding: 0.5rem;
+  background: #1c1c1c;
+  border: 1px solid #555;
+  color: white;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+.save-btn {
+  background-color: #27ae60;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #1e8449;
+}
+
+.cancel-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #c0392b;
+}
+
+.modal-remove-btn {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+}
+
+.modal-remove-btn:hover {
+  background-color: #c0392b;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

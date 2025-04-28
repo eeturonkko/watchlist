@@ -18,6 +18,7 @@ export function MovieCard({ movie }) {
     try {
       const payload = {
         userId: user.id,
+        movieId: movie.id,
         title: movie.title,
         type: "movie",
         status: "planned",
