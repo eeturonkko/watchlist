@@ -1,16 +1,20 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "../styles/WatchlistItem.css";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 
 export function WatchlistItem({ item, onRemove }) {
   const [status, setStatus] = useState(item.status);
+  const [notes, setNotes] = useState(item.notes || "");
+  const [rating, setRating] = useState(item.rating || "");
+  const [displayNotes, setDisplayNotes] = useState(item.notes || "");
+  const [displayRating, setDisplayRating] = useState(item.rating || "");
+  const dialogRef = useRef(null);
+
   const imageUrl = item.imageUrl ? item.imageUrl : "/no-image.png";
 
   const handleRemove = async () => {
     if (!item._id) return;
-
     try {
       await axios.delete(`http://localhost:3000/api/watchlist/${item._id}`);
       toast.success(`${item.title} removed from watchlist`);
@@ -25,7 +29,6 @@ export function WatchlistItem({ item, onRemove }) {
 
   const handleChangeStatus = async (newStatus) => {
     if (!item._id) return;
-
     try {
       await axios.put(`http://localhost:3000/api/watchlist/${item._id}`, {
         status: newStatus,
@@ -35,6 +38,33 @@ export function WatchlistItem({ item, onRemove }) {
     } catch (err) {
       console.error("Error updating status:", err);
       toast.error("Failed to update status. Please try again.");
+    }
+  };
+
+  const openDialog = () => {
+    setNotes(displayNotes);
+    setRating(displayRating);
+    dialogRef.current?.showModal();
+  };
+
+  const closeDialog = () => {
+    dialogRef.current?.close();
+  };
+
+  const handleSaveNotesAndRating = async () => {
+    if (!item._id) return;
+    try {
+      await axios.put(`http://localhost:3000/api/watchlist/${item._id}`, {
+        notes,
+        rating,
+      });
+      toast.success(`Notes and rating saved for ${item.title}`);
+      setDisplayNotes(notes);
+      setDisplayRating(rating);
+      closeDialog();
+    } catch (err) {
+      console.error("Error saving notes and rating:", err);
+      toast.error("Failed to save notes and rating. Please try again.");
     }
   };
 
@@ -53,25 +83,43 @@ export function WatchlistItem({ item, onRemove }) {
       statusClass = "Planned to watch";
   }
 
+  const hasNotesOrRating = displayNotes || displayRating;
+
   return (
-    <div className="watchlist-item">
-      <Link
-        to={`/movie/${item.movieId || ""}`}
-        className="watchlist-item-content"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img src={imageUrl} alt={item.title} className="watchlist-poster" />
-        <div className="watchlist-info">
-          <h3 className="watchlist-title">{item.title}</h3>
-
-          {item.notes && item.notes.trim() !== "" && (
-            <p className="watchlist-notes">Notes: {item.notes}</p>
-          )}
-
-          <p className="watchlist-status">{statusClass}</p>
-        </div>
-      </Link>
+    <div className={`watchlist-item ${!hasNotesOrRating ? "no-flip" : ""}`}>
+      <div className="watchlist-item-content">
+        {hasNotesOrRating ? (
+          <>
+            <div className="watchlist-front">
+              <img
+                src={imageUrl}
+                alt={item.title}
+                className="watchlist-poster"
+              />
+              <div className="watchlist-info">
+                <h3 className="watchlist-title">{item.title}</h3>
+                <p className="watchlist-status">{statusClass}</p>
+              </div>
+            </div>
+            <div className="watchlist-back">
+              {displayNotes && (
+                <p className="watchlist-notes">{displayNotes}</p>
+              )}
+              {displayRating && (
+                <p className="watchlist-rating">{displayRating}/5</p>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="watchlist-front">
+            <img src={imageUrl} alt={item.title} className="watchlist-poster" />
+            <div className="watchlist-info">
+              <h3 className="watchlist-title">{item.title}</h3>
+              <p className="watchlist-status">{statusClass}</p>
+            </div>
+          </div>
+        )}
+      </div>
 
       <select
         value={status}
@@ -83,9 +131,45 @@ export function WatchlistItem({ item, onRemove }) {
         <option value="completed">Completed</option>
       </select>
 
-      <button onClick={handleRemove} className="remove-btn">
-        Remove
-      </button>
+      {status === "completed" ? (
+        <button onClick={openDialog} className="notes-btn">
+          Add Notes/Rating
+        </button>
+      ) : (
+        <button onClick={handleRemove} className="remove-btn">
+          Remove
+        </button>
+      )}
+
+      <dialog ref={dialogRef} className="watchlist-dialog">
+        <h2>Add Notes and Rating</h2>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Write your notes here..."
+          className="notes-textarea"
+        />
+        <input
+          type="number"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+          placeholder="Rating (1-5)"
+          min="1"
+          max="5"
+          className="rating-input"
+        />
+        <div className="modal-buttons">
+          <button onClick={handleSaveNotesAndRating} className="save-btn">
+            Save
+          </button>
+          <button onClick={closeDialog} className="cancel-btn">
+            Cancel
+          </button>
+        </div>
+        <button onClick={handleRemove} className="modal-remove-btn">
+          Remove from Watchlist
+        </button>
+      </dialog>
     </div>
   );
 }
