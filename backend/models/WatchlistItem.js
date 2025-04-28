@@ -36,6 +36,10 @@ const WatchlistItemSchema = new mongoose.Schema({
     max: 5,
     default: null,
   },
+  releaseDate: {
+    type: String,
+    default: null,
+  },
   addedAt: {
     type: Date,
     default: Date.now,

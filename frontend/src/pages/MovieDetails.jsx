@@ -48,6 +48,7 @@ export function MovieDetails() {
       status: "planned",
       notes: "",
       imageUrl: imageUrl,
+      releaseDate: movie.release_date?.slice(0, 4) || "",
     };
 
     try {

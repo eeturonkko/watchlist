@@ -65,12 +65,40 @@ router.post(
       .trim()
       .isURL()
       .withMessage("imageUrl must be a valid URL"),
+    body("movieId")
+      .trim()
+      .notEmpty()
+      .withMessage("movieId is required")
+      .isString()
+      .withMessage("movieId must be a string"),
+    body("rating")
+      .optional()
+      .isNumeric()
+      .withMessage("rating must be a number")
+      .custom((value) => {
+        if (value < 1 || value > 5) {
+          throw new Error("rating must be between 1 and 5");
+        }
+        return true;
+      }),
+    body("releaseDate")
+      .optional()
+      .isString()
+      .withMessage("releaseDate must be a string"),
   ],
   handleValidation,
   async (req, res) => {
     try {
-      const { userId, movieId, title, type, status, notes, imageUrl } =
-        req.body;
+      const {
+        userId,
+        movieId,
+        title,
+        type,
+        status,
+        notes,
+        imageUrl,
+        releaseDate,
+      } = req.body;
       const newItem = new WatchlistItem({
         userId,
         movieId,
@@ -79,6 +107,7 @@ router.post(
         status,
         notes,
         imageUrl,
+        releaseDate,
       });
       const savedItem = await newItem.save();
       res.status(201).json(savedItem);

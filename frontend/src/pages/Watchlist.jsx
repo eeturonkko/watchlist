@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./styles/Watchlist.css";
 import { useUser } from "@clerk/clerk-react";
 import WatchlistItem from "../components/ui/WatchlistItem";
@@ -20,7 +20,7 @@ export const Watchlist = () => {
         const data = await response.json();
         const formattedData = data.map((movie) => ({
           ...movie,
-          release_date: movie.release_date?.toString() || "",
+          releaseDate: movie.releaseDate?.toString() || "",
         }));
         setMovies(formattedData);
       } catch (error) {
@@ -31,6 +31,18 @@ export const Watchlist = () => {
     fetchWatchlist();
   }, [user?.id]);
 
+  const decades = useMemo(() => {
+    const years = movies
+      .map((movie) => parseInt(movie.releaseDate?.slice(0, 4)))
+      .filter((year) => !isNaN(year));
+
+    const decadeSet = new Set(
+      years.map((year) => `${Math.floor(year / 10) * 10}s`)
+    );
+
+    return Array.from(decadeSet).sort((a, b) => b.localeCompare(a));
+  }, [movies]);
+
   const getFilteredMovies = () => {
     let filtered = [...movies];
 
@@ -38,7 +50,7 @@ export const Watchlist = () => {
       const startYear = parseInt(filterByYear.slice(0, 4));
       const endYear = startYear + 9;
       filtered = filtered.filter((movie) => {
-        const year = parseInt(movie.release_date?.slice(0, 4));
+        const year = parseInt(movie.releaseDate?.slice(0, 4));
         return year >= startYear && year <= endYear;
       });
     }
@@ -46,9 +58,11 @@ export const Watchlist = () => {
     if (sortMovies === "title") {
       filtered.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortMovies === "year") {
-      filtered.sort(
-        (a, b) => parseInt(a.release_date) - parseInt(b.release_date)
-      );
+      filtered.sort((a, b) => {
+        const yearA = parseInt(a.releaseDate) || 0;
+        const yearB = parseInt(b.releaseDate) || 0;
+        return yearA - yearB;
+      });
     }
 
     return filtered;
@@ -86,21 +100,7 @@ export const Watchlist = () => {
             onChange={(event) => setFilterByYear(event.target.value)}
           >
             <option value="all">All</option>
-            {[
-              "2020s",
-              "2010s",
-              "2000s",
-              "1990s",
-              "1980s",
-              "1970s",
-              "1960s",
-              "1950s",
-              "1940s",
-              "1930s",
-              "1920s",
-              "1910s",
-              "1900s",
-            ].map((decade) => (
+            {decades.map((decade) => (
               <option key={decade} value={decade}>
                 {decade}
               </option>
