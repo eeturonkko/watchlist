@@ -12,7 +12,7 @@ export function MovieDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const imageUrl = movie.poster_path
+  const imageUrl = movie?.poster_path
     ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : "/no-image.png";
 
