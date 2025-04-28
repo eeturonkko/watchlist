@@ -73,3 +73,23 @@
 .remove-btn:hover {
   background-color: #c0392b;
 }
+
+.watchlist-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.status-select {
+  padding: 0.5rem;
+  background: #2c2c2c;
+  color: white;
+  border: none;
+  border-top: 1px solid #333;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  appearance: none;
+}
