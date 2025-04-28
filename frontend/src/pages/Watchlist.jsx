@@ -116,7 +116,7 @@ export const Watchlist = () => {
           {filteredMovies.map((item, index) => (
             <div
               key={item._id || item.id}
-              className="movie-card-wrapper"
+              className="movie-card-wrapper fade-in-up"
               style={{ ["--i"]: `${index}` }}
             >
               <WatchlistItem item={item} onRemove={handleRemoveItem} />

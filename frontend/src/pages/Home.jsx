@@ -23,8 +23,8 @@ export const Home = ({ trending }) => {
         {trending.map((movie, index) => (
           <div
             key={movie.id}
-            className="movie-card-wrapper"
-            style={{ ["--i"]: `${index}` }}
+            className="movie-card-wrapper fade-in-up"
+            style={{ ["--i"]: index }}
           >
             <MovieCard movie={movie} />
           </div>
