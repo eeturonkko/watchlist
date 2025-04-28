@@ -9,3 +9,12 @@ export const fetchTrending = async () => {
   const data = await res.json();
   return { ...data, results: data.results.slice(0, 12) };
 };
+
+export const fetchMovieByName = async (name) => {
+  const res = await fetch(
+    `${BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${name}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch movie by name");
+  const data = await res.json();
+  return { ...data, results: data.results.slice(0, 1) };
+};
