@@ -10,6 +10,7 @@ import { Watchlist } from "./pages/Watchlist";
 import { ToastContainer } from "react-toastify";
 import { MovieDetails } from "./pages/MovieDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Newsletter from "./pages/NewsletterTest"; //tämä on vaan testisivu
 
 function App() {
   const [trending, setTrending] = useState([]);
@@ -38,6 +39,7 @@ function App() {
               <Route path="/watchlist" element={<Watchlist />} />
               <Route path="/movie/:id" element={<MovieDetails />} />
               <Route path="/movies" element={<Movies />} />{" "}
+              <Route path="/newslettertest" element={<Newsletter />} />
             </Routes>
           </div>
           <ToastContainer />
