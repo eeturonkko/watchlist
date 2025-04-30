@@ -3,6 +3,7 @@ const router = express.Router();
 const sanitizeHtml = require("sanitize-html");
 const WatchlistItem = require("../models/WatchlistItem");
 const { body, param, validationResult } = require("express-validator");
+const { sendEmail } = require("../services/emailService.js");
 
 const handleValidation = (req, res, next) => {
   const errors = validationResult(req);
@@ -116,6 +117,24 @@ router.post(
     }
   }
 );
+
+router.post("/newsletter", async (req, res) => {
+  const { email } = req.body;
+
+  if (!email)
+    return res
+      .status(500)
+      .json({ error: "Failed to receive an email address" });
+  try {
+    await sendEmail(email);
+    console.log("Email sent");
+    res.status(200).json({ message: "Email sent" });
+  } catch (err) {
+    console.error("Failed: ", err);
+    res.status(500).json({ error: "Failed to send email" });
+    console.log(error);
+  }
+});
 
 router.put(
   "/:id",
