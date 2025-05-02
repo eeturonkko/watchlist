@@ -13,11 +13,12 @@ export default function Footer() {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:3000/newsletter", { email });
-      console.log("Subscribed successfully:", email);
+      await axios.post("/api/watchlist/newsletter", { email });
+      alert("Subscribed!");
       setEmail("");
     } catch (error) {
       console.error("Subscription failed:", error);
+      alert("Subscription failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -32,7 +33,7 @@ export default function Footer() {
       <form onSubmit={handleSubscribe} className="newsletter-form">
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="Your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
