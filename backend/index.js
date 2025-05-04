@@ -5,6 +5,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const watchlistRoutes = require("./routes/watchlist");
+const imdbRoutes = require("./routes/rating-IMDB");
+
 
 const app = express();
 const PORT = 3000;
@@ -18,6 +20,7 @@ mongoose
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 app.use("/api/watchlist", watchlistRoutes);
+app.use("/api/movie-rating", imdbRoutes);
 
 app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello from Express backend!" });

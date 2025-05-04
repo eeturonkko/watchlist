@@ -9,6 +9,7 @@ export function MovieDetails() {
   const { id } = useParams();
   const { user } = useUser();
   const [movie, setMovie] = useState(null);
+  const [imdbRating, setImdbRating] = useState(null); // IMDb-arvosana tallennettuna tähän
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -16,26 +17,43 @@ export function MovieDetails() {
     ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : "/no-image.png";
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=${
-            import.meta.env.VITE_TMDB_API_KEY
-          }&language=en-US`
-        );
-        if (!res.ok) throw new Error("Elokuvan tietoja ei voitu ladata");
-        const data = await res.json();
-        setMovie(data); // Tallennetaan elokuvan tiedot
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovie();
-  }, [id]); // Hakee tiedot aina kun elokuvan ID muuttuu
+    useEffect(() => {
+      const fetchMovie = async () => {
+        try {
+          const res = await fetch(
+            `https://api.themoviedb.org/3/movie/${id}?api_key=${
+              import.meta.env.VITE_TMDB_API_KEY
+            }&language=en-US`
+          );
+          if (!res.ok) throw new Error("Elokuvan tietoja ei voitu ladata");
+          const data = await res.json();
+          setMovie(data); // Tallennetaan elokuvan tiedot
+    
+          // Haetaan IMDb ID
+          const imdbId = data.imdb_id; // IMDb ID
+    
+          // Tulostetaan IMDb ID konsoliin (debug)
+          console.log("Löydetty IMDb ID:", imdbId);
+    
+          // Haetaan IMDb-arvosana OMDB API:sta
+          if (imdbId) {
+            const imdbRes = await fetch(`/api/movie-rating/${imdbId}`); // Lähetetään IMDb ID backendille
+            if (imdbRes.ok) {
+              const imdbData = await imdbRes.json();
+              setImdbRating(imdbData.imdbRating); // Tallennetaan IMDb-arvosana
+            }
+          }
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+    
+      fetchMovie();
+    }, [id]); // Hakee tiedot aina kun elokuvan ID muuttuu
+    
+    
 
   const handleAddToWatchlist = async () => {
     if (!movie) return;
@@ -81,7 +99,7 @@ export function MovieDetails() {
         <div className="movie-rating">
           <div>
             <strong>IMDb Rating</strong>
-            <div>{movie.vote_average ? movie.vote_average : "N/A"}</div>
+            <div>{imdbRating ? imdbRating : ":((("}</div> {/* Näytetään IMDb-arvosana */}
           </div>
           <div>
             <strong>User Score</strong>
