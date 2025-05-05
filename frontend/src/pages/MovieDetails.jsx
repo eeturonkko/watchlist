@@ -81,7 +81,7 @@ export function MovieDetails() {
         <div className="movie-rating">
           <div>
             <strong>IMDb Rating</strong>
-            <div>{movie.vote_average ? movie.vote_average : "N/A"}</div>
+            <div>{imdbRating ? imdbRating : "N/A"}</div> {/* Näytetään IMDb-arvosana */}
           </div>
           <div>
             <strong>User Score</strong>
