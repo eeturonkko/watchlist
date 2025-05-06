@@ -1,3 +1,4 @@
+
 const express = require("express");
 const fetch = require("node-fetch");
 const router = express.Router();
@@ -28,6 +29,7 @@ router.get("/:id", async (req, res) => {
     // Logita virhe ja palauta virheviesti
     console.error("Error fetching IMDb rating:", err);
     res.status(500).json({ error: "Failed to fetch IMDb rating from OMDB" });
+
   }
 });
 

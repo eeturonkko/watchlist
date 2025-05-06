@@ -31,6 +31,9 @@ export const Watchlist = () => {
     fetchWatchlist();
   }, [user?.id]);
 
+  // Lasketaan vuosikymmenet suodatusta varten (esim. "1990s", "2000s").
+  // useMemo siksi että se lasketaan vain kerran, kun elokuvat muuttuu esim filtteröimällä.
+  // Tämä parantaa suorituskykyä, koska se ei laske vuosikymmeniä joka renderöinnissä.
   const decades = useMemo(() => {
     const years = movies
       .map((movie) => parseInt(movie.releaseDate?.slice(0, 4)))

@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { Movies } from "./pages/Movies";
 import { useEffect, useState } from "react";
 import Header from "./components/ui/Header";
+import Footer from "./components/ui/Footer";
 import { fetchTrending } from "./utils/tmdb";
 import { Watchlist } from "./pages/Watchlist";
 import { ToastContainer } from "react-toastify";
@@ -43,6 +44,7 @@ function App() {
             </Routes>
           </div>
           <ToastContainer />
+          <Footer />
         </main>
       </div>
     </Router>
