@@ -3,7 +3,11 @@ const router = express.Router();
 const sanitizeHtml = require("sanitize-html");
 const WatchlistItem = require("../models/WatchlistItem");
 const { body, param, validationResult } = require("express-validator");
-const { sendEmail } = require("../services/emailService.js");
+const {
+  sendEmail,
+  broadcastNewsletter,
+} = require("../services/emailService.js");
+const NewsletterEmail = require("../models/NewsletterEmail.js");
 
 const handleValidation = (req, res, next) => {
   const errors = validationResult(req);
@@ -126,13 +130,36 @@ router.post("/newsletter", async (req, res) => {
       .status(500)
       .json({ error: "Failed to receive an email address" });
   try {
+    const newEmail = new NewsletterEmail({ email });
+    await newEmail.save();
     await sendEmail(email);
     console.log("Email sent");
     res.status(200).json({ message: "Email sent" });
   } catch (err) {
-    console.error("Failed: ", err);
+    console.error("Error: ", err);
     res.status(500).json({ error: "Failed to send email" });
-    console.log(error);
+  }
+});
+
+router.post("/newsletter/broadcast", async (req, res) => {
+  const { subject, text } = req.body;
+  const html = text;
+
+  if (!text) {
+    return res
+      .status(500)
+      .json({ error: "You are trying to send an empty email!" });
+  }
+
+  try {
+    const allEmails = await NewsletterEmail.find({});
+    const toSavedEmails = allEmails.map((currentEmail) => currentEmail.email);
+
+    await broadcastNewsletter(toSavedEmails, subject, text, html);
+
+    res.status(200).json({ message: "Sent!" });
+  } catch (err) {
+    console.error("Error: ", err);
   }
 });
 
