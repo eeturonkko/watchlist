@@ -11,7 +11,7 @@ import { Watchlist } from "./pages/Watchlist";
 import { ToastContainer } from "react-toastify";
 import { MovieDetails } from "./pages/MovieDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Newsletter from "./pages/NewsletterTest"; //tämä on vaan testisivu
+import Newsletter from "./pages/NewsletterTest"; //tämä on newsletterin lähetyssivu
 
 function App() {
   const [trending, setTrending] = useState([]);
