@@ -31,14 +31,22 @@ export default function Footer() {
         <p>Get the latest updates and news directly in your inbox.</p>
       </div>
       <form onSubmit={handleSubscribe} className="newsletter-form">
+        <label htmlFor="email-input" className="sr-only">Enter your email address</label>
         <input
+          id="email-input" 
           type="email"
           placeholder="Your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          tabIndex="0"  
         />
-        <button type="submit" disabled={loading}>
+        <button
+          type="submit"
+          disabled={loading}
+          aria-label={loading ? "Subscribing..." : "Subscribe to newsletter"}  
+          tabIndex="0"  
+        >
           {loading ? "Subscribing..." : "Subscribe"}
         </button>
       </form>

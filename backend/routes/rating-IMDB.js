@@ -15,8 +15,8 @@ router.get("/:id", async (req, res) => {
     );
     const data = await response.json();
 
-    // logita Apin vastaus konsoliin koska ei se nyt toiminut :SS
-    console.log("OMDB API Response:", data);
+    // logita Apin vastaus konsoliin tarvittaessa
+    //console.log("OMDB API Response:", data);
 
     if (data.Response === "True") {
       // onnistunut vastaus palauttaaa IMDb-arvosanan

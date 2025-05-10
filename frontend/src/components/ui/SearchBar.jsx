@@ -11,7 +11,9 @@ const SearchBar = ({
 }) => {
   return (
     <div className="search-bar">
+      <label htmlFor="search-input">Search:</label>
       <input
+        id="search-input"
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}

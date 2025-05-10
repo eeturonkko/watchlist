@@ -17,43 +17,41 @@ export function MovieDetails() {
     ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : "/no-image.png";
 
-    useEffect(() => {
-      const fetchMovie = async () => {
-        try {
-          const res = await fetch(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=${
-              import.meta.env.VITE_TMDB_API_KEY
-            }&language=en-US`
-          );
-          if (!res.ok) throw new Error("Elokuvan tietoja ei voitu ladata");
-          const data = await res.json();
-          setMovie(data); // Tallennetaan elokuvan tiedot
-    
-          // Haetaan IMDb ID
-          const imdbId = data.imdb_id; // IMDb ID
-    
-          // Tulostetaan IMDb ID konsoliin (debug)
-          console.log("Löydetty IMDb ID:", imdbId);
-    
-          // Haetaan IMDb-arvosana OMDB API:sta
-          if (imdbId) {
-            const imdbRes = await fetch(`/api/movie-rating/${imdbId}`); // Lähetetään IMDb ID backendille
-            if (imdbRes.ok) {
-              const imdbData = await imdbRes.json();
-              setImdbRating(imdbData.imdbRating); // Tallennetaan IMDb-arvosana
-            }
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${
+            import.meta.env.VITE_TMDB_API_KEY
+          }&language=en-US`
+        );
+        if (!res.ok) throw new Error("Elokuvan tietoja ei voitu ladata");
+        const data = await res.json();
+        setMovie(data); // Tallennetaan elokuvan tiedot
+
+        // Haetaan IMDb ID
+        const imdbId = data.imdb_id; // IMDb ID
+
+        // Tulostetaan IMDb ID konsoliin (debug)
+        console.log("Löydetty IMDb ID:", imdbId);
+
+        // Haetaan IMDb-arvosana OMDB API:sta
+        if (imdbId) {
+          const imdbRes = await fetch(`/api/movie-rating/${imdbId}`); // Lähetetään IMDb ID backendille
+          if (imdbRes.ok) {
+            const imdbData = await imdbRes.json();
+            setImdbRating(imdbData.imdbRating); // Tallennetaan IMDb-arvosana
           }
-        } catch (err) {
-          setError(err.message);
-        } finally {
-          setLoading(false);
         }
-      };
-    
-      fetchMovie();
-    }, [id]); // Hakee tiedot aina kun elokuvan ID muuttuu
-    
-    
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovie();
+  }, [id]); // Hakee tiedot aina kun elokuvan ID muuttuu
 
   const handleAddToWatchlist = async () => {
     if (!movie) return;
@@ -85,9 +83,10 @@ export function MovieDetails() {
   return (
     <div className="movie-details">
       <img
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        alt={movie.title}
+        src={imageUrl}
+        alt={movie.title}  // Alt-teksti parantaa saavutettavuutta
         className="movie-poster"
+        tabIndex="0"  // Lisää tämä rivi, jotta kuva saa fokuksen tabilla
       />
       <div className="movie-info">
         <h1>{movie.title}</h1>
@@ -97,17 +96,24 @@ export function MovieDetails() {
         </h3>
         <p className="movie-overview">{movie.overview}</p>
         <div className="movie-rating">
-          <div>
+          <div tabIndex="0">
             <strong>IMDb Rating</strong>
-            <div>{imdbRating ? imdbRating : "N/A"}</div> {/* Näytetään IMDb-arvosana */}
+            <div aria-live="polite" role="status">
+              {imdbRating ? imdbRating : "N/A"}
+            </div> {/* Näytetään IMDb-arvosana */}
           </div>
-          <div>
+          <div tabIndex="0">
             <strong>User Score</strong>
             <div>{movie.vote_count}</div>
           </div>
         </div>
         <SignedIn>
-          <button onClick={handleAddToWatchlist}>Add to Watchlist</button>{" "}
+          <button
+            onClick={handleAddToWatchlist}
+            aria-label={`Add ${movie.title} to your watchlist`}
+          >
+            Add to Watchlist
+          </button>
         </SignedIn>
       </div>
     </div>
