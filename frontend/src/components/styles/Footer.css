@@ -45,8 +45,8 @@
 
 .newsletter-form button {
   padding: 0.75rem 1.2rem;
-  background-color: #3498db;
-  color: white;
+  background-color: #21618c; /* Tummempi sininen taustaväri */
+  color: white; /* Valkoinen teksti */
   border: none;
   border-radius: 999px;
   font-size: 1rem;
@@ -55,7 +55,13 @@
 }
 
 .newsletter-form button:hover {
-  background-color: #2980b9;
+  background-color: #1f6695; /* Tumma sininen hover-tila */
+}
+
+/* Fokusoitumiskorostus */
+.newsletter-form button:focus {
+  outline: 3px solid #e91e63; /* Fokuskorostus, punainen reunus */
+  outline-offset: 2px;
 }
 
 .newsletter-form button:disabled {

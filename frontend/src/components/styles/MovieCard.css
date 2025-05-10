@@ -14,6 +14,7 @@
   padding: 1rem;
   align-items: stretch;
 }
+
 .movie-card {
   display: flex;
   flex-direction: column;
@@ -31,6 +32,7 @@
 .movie-card:hover {
   transform: scale(1.03);
 }
+
 .movie-poster {
   width: 100%;
   height: 240px;
@@ -51,6 +53,7 @@
   font-size: 1rem;
   margin: 0.3rem 0 0.1rem;
   line-height: 1.2;
+  color: #ffffff; /* Valkea teksti parantaa kontrastia */
 }
 
 .movie-date {
@@ -60,8 +63,8 @@
 
 .add-btn {
   padding: 0.5rem;
-  background-color: #3498db;
-  color: white;
+  background-color: #0E4A6A; /* Tummempi sininen taustaväri (parempi kontrasti) */
+  color: #FFFFFF; /* Valkoinen teksti */
   border: none;
   font-weight: bold;
   cursor: pointer;
@@ -71,5 +74,10 @@
 }
 
 .add-btn:hover {
-  background-color: #2980b9;
+  background-color: #0C3B54; /* Vielä tummempi sininen hover-tila */
+}
+
+.add-btn:focus {
+  outline: 3px solid #e91e63; /* Fokuskorostus, punainen reunus */
+  outline-offset: 2px;
 }
