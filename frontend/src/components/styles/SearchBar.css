@@ -25,8 +25,8 @@
 
 .search-button {
   padding: 0.75rem 1.2rem;
-  background-color: #3498db;
-  color: white;
+  background-color: #2c3e50; /* Tummempi taustaväri (parempi kontrasti) */
+  color: white; /* Valkoinen teksti */
   border: none;
   border-radius: 999px;
   font-size: 1rem;
@@ -35,7 +35,12 @@
 }
 
 .search-button:hover {
-  background-color: #2980b9;
+  background-color: #34495e; /* Tumma sininen hover-tila */
+}
+
+.search-button:focus {
+  outline: 3px solid #e91e63; /* Fokuskorostus (punainen reunus) */
+  outline-offset: 2px;
 }
 
 .search-checkbox-container {
@@ -54,6 +59,10 @@
 
 .search-checkbox-container label {
   font-size: 0.95rem;
-
   cursor: pointer;
+}
+
+.search-checkbox-container input[type="checkbox"]:focus {
+  outline: 3px solid #e91e63; /* Fokusoituu checkboxin korostus */
+  outline-offset: 2px;
 }
