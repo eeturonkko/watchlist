@@ -4,7 +4,7 @@ import "./App.css";
 import { Home } from "./pages/Home";
 import { Movies } from "./pages/Movies";
 import { useEffect, useState } from "react";
-import Header from "./components/ui/Header";
+import Header from "./components/ui/header";
 import Footer from "./components/ui/Footer";
 import { fetchTrending } from "./utils/tmdb";
 import { Watchlist } from "./pages/Watchlist";
