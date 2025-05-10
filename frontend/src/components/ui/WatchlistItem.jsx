@@ -122,6 +122,7 @@ export function WatchlistItem({ item, onRemove }) {
       </div>
 
       <select
+        aria-label={`select movie status for ${item.title}`}
         value={status}
         onChange={(e) => handleChangeStatus(e.target.value)}
         className="status-select"
